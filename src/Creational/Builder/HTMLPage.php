@@ -1,7 +1,7 @@
 <?php
 namespace DP\Creational\Builder;
 
-class HTMLPage
+class HTMLPage implements Page
 {
     private $page = null;
     private $page_title = null;
