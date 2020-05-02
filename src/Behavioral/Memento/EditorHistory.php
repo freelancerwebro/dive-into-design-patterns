@@ -14,4 +14,9 @@ class EditorHistory
     {
         return array_pop($this->states);
     }
+
+    public function getStates()
+    {
+        return $this->states;
+    }
 }

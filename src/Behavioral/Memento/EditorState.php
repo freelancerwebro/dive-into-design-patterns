@@ -3,7 +3,7 @@ namespace DP\Behavioral\Memento;
 
 class EditorState
 {
-    private $content; /** final **/
+    private $content;
 
     public function __construct(string $content)
     {

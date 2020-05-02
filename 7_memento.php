@@ -16,6 +16,6 @@ $history->push($editor->createState());
 
 $editor->setContent("third content");
 $editor->restore($history->pop());
-$editor->restore($history->pop());
 
 echo $editor->getContent() . "\n\n";
+print_r($history->getStates());
