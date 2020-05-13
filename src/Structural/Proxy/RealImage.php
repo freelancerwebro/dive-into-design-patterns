@@ -18,6 +18,6 @@ class RealImage implements ImageInterface
 
     public function loadFromDisk()
     {
-        echo "Loading " . $this->fileName . "\n";
+        echo "Loading file from disk " . $this->fileName . "\n";
     }
 }
