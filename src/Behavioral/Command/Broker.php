@@ -5,6 +5,11 @@ class Broker
 {
     private $orderList = [];
 
+    public function getOrderList(): array
+    {
+        return $this->orderList;
+    }
+
     public function takeOrder(OrderInterface $order): void
     {
         $this->orderList[] = $order;
