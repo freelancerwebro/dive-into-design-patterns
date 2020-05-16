@@ -60,4 +60,45 @@ class CommandTest extends TestCase
         $expected = "BUY | Stock name: " . $stockName . ", quantity: " . $stockQuantity . "\n";
         $this->expectOutputString($expected);
     }
+
+    public function testIfBrokerCanAddOrders()
+    {
+        $googleStock = new Stock("GOOGL", 3);
+        $appleStock = new Stock("AAPL", 2);
+
+        $buyOrder = new BuyOrder($googleStock);
+        $sellOrder = new SellOrder($appleStock);
+
+        $broker = new Broker();
+        $broker->takeOrder($buyOrder);
+        $broker->takeOrder($sellOrder);
+
+        $expected = [
+            $buyOrder,
+            $sellOrder
+        ];
+        $this->assertSame($expected, $broker->getOrderList());
+    }
+
+    public function testIfBrokerOrdersWork()
+    {
+        $googleStock = new Stock("GOOGL", 3);
+        $appleStock = new Stock("AAPL", 2);
+
+        $buyOrder = new BuyOrder($googleStock);
+        $sellOrder = new SellOrder($appleStock);
+
+        $broker = new Broker();
+        $broker->takeOrder($buyOrder);
+        $broker->takeOrder($sellOrder);
+
+        $broker->placeOrders();
+
+        $expected = [];
+        $this->assertSame($expected, $broker->getOrderList());
+
+        $expected = "BUY | Stock name: GOOGL, quantity: 3\n";
+        $expected .= "SELL | Stock name: AAPL, quantity: 2\n";
+        $this->expectOutputString($expected);
+    }
 }
