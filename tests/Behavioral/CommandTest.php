@@ -14,8 +14,8 @@ class CommandTest extends TestCase
         $stockName     = "GOOGL";
         $stockQuantity = 3;
 
-        $googleStock = new Stock($stockName, $stockQuantity);
-        $googleStock->buy();
+        $stock = new Stock($stockName, $stockQuantity);
+        $stock->buy();
 
         $expected = "BUY | Stock name: " . $stockName . ", quantity: " . $stockQuantity . "\n";
         $this->expectOutputString($expected);
@@ -26,10 +26,38 @@ class CommandTest extends TestCase
         $stockName     = "AAPL";
         $stockQuantity = 5;
 
-        $googleStock = new Stock($stockName, $stockQuantity);
-        $googleStock->sell();
+        $stock = new Stock($stockName, $stockQuantity);
+        $stock->sell();
 
         $expected = "SELL | Stock name: " . $stockName . ", quantity: " . $stockQuantity . "\n";
+        $this->expectOutputString($expected);
+    }
+
+    public function testIfSellOrderWorks()
+    {
+        $stockName     = "AAPL";
+        $stockQuantity = 5;
+
+        $stock = new Stock($stockName, $stockQuantity);
+        $sellOrder = new SellOrder($stock);
+
+        $sellOrder->execute();
+
+        $expected = "SELL | Stock name: " . $stockName . ", quantity: " . $stockQuantity . "\n";
+        $this->expectOutputString($expected);
+    }
+
+    public function testIfBuyOrderWorks()
+    {
+        $stockName     = "AAPL";
+        $stockQuantity = 1;
+
+        $stock = new Stock($stockName, $stockQuantity);
+        $buyOrder = new BuyOrder($stock);
+
+        $buyOrder->execute();
+
+        $expected = "BUY | Stock name: " . $stockName . ", quantity: " . $stockQuantity . "\n";
         $this->expectOutputString($expected);
     }
 }
